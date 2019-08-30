@@ -8,12 +8,32 @@ namespace Disboard.Misskey
 {
     public partial class MisskeyClient
     {
-        public async Task<Chart> ChartWsAsync(int? limit = null)
+        public async Task<Endpoint> EndpointWsAsync(string endpoint)
+        {
+            var parameters = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("endpoint", endpoint)
+            };
+
+            return await SendWsAsync<Endpoint>("endpoint", parameters).Stay();
+        }
+
+        public async Task<IEnumerable<string>> EndpointsWsAsync()
+        {
+            return await SendWsAsync<IEnumerable<string>>("endpoints").Stay();
+        }
+
+        public async Task<Metadata> MetaWsAsync(bool? detail = null)
         {
             var parameters = new List<KeyValuePair<string, object>>();
-            parameters.AddIfValidValue("limit", limit);
+            parameters.AddIfValidValue("detail", detail);
 
-            return await SendWsAsync<Chart>("chart").Stay();
+            return await SendWsAsync<Metadata>("meta", parameters).Stay();
+        }
+
+        public async Task<IEnumerable<User>> PinnedUsersWsAsync()
+        {
+            return await SendWsAsync<IEnumerable<User>>("pinned-users").Stay();
         }
 
         public async Task<Drive> DriveWsAsync()
@@ -25,14 +45,6 @@ namespace Disboard.Misskey
         public async Task<User> IWsAsync()
         {
             return await SendWsAsync<User>("i").Stay();
-        }
-
-        public async Task<Metadata> MetaWsAsync(bool? detail = null)
-        {
-            var parameters = new List<KeyValuePair<string, object>>();
-            parameters.AddIfValidValue("detail", detail);
-
-            return await SendWsAsync<Metadata>("meta", parameters).Stay();
         }
 
         public async Task<List<Note>> NotesWsAsync(bool? local = null, bool? reply = null, bool? renote = null, bool? withFiles = null, bool? poll = null, int? limit = null, string sinceId = null, string untilId = null)

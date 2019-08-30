@@ -6,8 +6,8 @@ namespace Disboard.Misskey.Models
 {
     public class Twitter : ApiResponse
     {
-        [JsonProperty("userId")]
-        public string UserId { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         [JsonProperty("screenName")]
         public string ScreenName { get; set; }

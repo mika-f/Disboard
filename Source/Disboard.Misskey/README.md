@@ -27,17 +27,21 @@ var misskey = new MisskeyClient("misskey.xyz");
 
 // register app
 var permissions = new List<Permission> {
-    Permission.AccountRead, Permission.AccountRead2, 
-    Permission.AccountWrite, Permission.AccountWrite2,
+    Permission.AccountRead, Permission.AccountWrite,
+    Permission.BlocksRead, Permission.BlocksWrite,
     Permission.DriveRead, Permission.DriveWrite,
-    Permission.FavoritesRead, Permission.FavoriteWrite,
+    Permission.FavoritesRead, Permission.FavoritesWrite,
     Permission.FollowingRead, Permission.FollowingWrite,
     Permission.MessagingRead, Permission.MessagingWrite,
-    Permission.NoteWrite,
-    Permission.NotificationWrite,
-    Permission.ReactionWrite,
-    Permission.VoteWrite,
+    Permission.MutesRead, Permission.MutesWrite,
+    Permission.NotificationsRead, Permission.NotificationsWrite,
+    Permission.PagesRead, Permission.PagesWrite,
+    Permission.PageLikesRead, Permission.PageLikesWrite,
+    Permission.ReactionsRead, Permission.ReactionsWrite,
+    Permission.UserGroupsRead, Permission.UserGroupsWrite,
+    Permission.VotesWrite,
 };
+
 // permission is "string[]", because Misskey's permission is very flexible and possibility that it will increase in the future.
 await misskey.App.CreateAsync("Orion", "Orion is generic microblogging client", permissions.Select(w => w.ToStr()).ToArray(), "https://static.mochizuki.moe/callback.html");
 
@@ -46,8 +50,8 @@ var session = await misskey.Auth.Session.Generate();
 Process.Start(session.Url);
 
 // Wait for user accepts client that access to your info
-Console.ReadLine();
-await misskey.Auth.Session.UserKeyAsync(session.Token);
+var token = Console.ReadLine();
+await misskey.Auth.Session.UserKeyAsync(token);
 
 // If you want to call REST API, please use method that has "Async()" suffix.
 await misskey.IAsync();

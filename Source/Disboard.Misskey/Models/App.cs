@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Disboard.Models;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Disboard.Misskey.Models
 {
@@ -12,16 +10,6 @@ namespace Disboard.Misskey.Models
     {
         [JsonProperty("callbackUrl")]
         public string CallbackUrl { get; set; }
-
-        [JsonProperty("createdAt")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
-        public DateTime CreatedAt { get; set; }
-
-        [JsonProperty("description")]
-        public string Description { get; set; }
-
-        [JsonProperty("iconUrl")]
-        public string IconUrl { get; set; }
 
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -37,8 +25,5 @@ namespace Disboard.Misskey.Models
 
         [JsonProperty("secret")]
         public string Secret { get; set; }
-
-        [JsonProperty("userId")]
-        public string UserId { get; set; }
     }
 }

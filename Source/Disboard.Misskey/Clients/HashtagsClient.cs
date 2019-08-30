@@ -35,7 +35,7 @@ namespace Disboard.Misskey.Clients
             return await PostAsync<List<TrendTag>>("/trend").Stay();
         }
 
-        public async Task<List<User>> UsersAsync(string tag, string sort, int? limit = null, string state = null, string origin = null)
+        public async Task<IEnumerable<User>> UsersAsync(string tag, string sort, int? limit = null, string state = null, string origin = null)
         {
             var parameters = new List<KeyValuePair<string, object>>
             {
@@ -46,7 +46,7 @@ namespace Disboard.Misskey.Clients
             parameters.AddIfValidValue("state", state);
             parameters.AddIfValidValue("origin", origin);
 
-            return await PostAsync<List<User>>("/users", parameters).Stay();
+            return await PostAsync<IEnumerable<User>>("/users", parameters).Stay();
         }
     }
 }

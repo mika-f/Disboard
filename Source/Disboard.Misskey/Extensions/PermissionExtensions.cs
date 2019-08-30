@@ -11,52 +11,79 @@ namespace Disboard.Misskey.Extensions
             switch (permission)
             {
                 case Permission.AccountRead:
-                    return "account-read";
+                    return "read:account";
 
                 case Permission.AccountWrite:
-                    return "account-write";
+                    return "write:account";
+
+                case Permission.BlocksRead:
+                    return "read:blocks";
+
+                case Permission.BlocksWrite:
+                    return "write:blocks";
 
                 case Permission.DriveRead:
-                    return "drive-read";
+                    return "read:drive";
 
                 case Permission.DriveWrite:
-                    return "drive-write";
+                    return "write:drive";
 
                 case Permission.FavoritesRead:
-                    return "favorites-read";
+                    return "read:favorites";
 
-                case Permission.FavoriteWrite:
-                    return "favorite-write";
-
-                case Permission.FollowingWrite:
-                    return "following-write";
+                case Permission.FavoritesWrite:
+                    return "write:favorites";
 
                 case Permission.FollowingRead:
-                    return "following-read";
+                    return "read:following";
+
+                case Permission.FollowingWrite:
+                    return "write:following";
 
                 case Permission.MessagingRead:
-                    return "messaging-read";
+                    return "read:messaging";
 
                 case Permission.MessagingWrite:
-                    return "messaging-write";
+                    return "write:messaging";
 
-                case Permission.NoteWrite:
-                    return "note-write";
+                case Permission.MutesRead:
+                    return "read:mutes";
 
-                case Permission.NotificationWrite:
-                    return "notification-write";
+                case Permission.MutesWrite:
+                    return "write:mutes";
 
-                case Permission.ReactionWrite:
-                    return "reaction-write";
+                case Permission.NotificationsRead:
+                    return "read:notifications";
 
-                case Permission.VoteWrite:
-                    return "vote-write";
+                case Permission.NotificationsWrite:
+                    return "write:notification";
 
-                case Permission.AccountRead2:
-                    return "account/read";
+                case Permission.ReactionsRead:
+                    return "read:reactions";
 
-                case Permission.AccountWrite2:
-                    return "account/write";
+                case Permission.ReactionsWrite:
+                    return "write:reactions";
+
+                case Permission.VotesWrite:
+                    return "write:votes";
+
+                case Permission.PagesRead:
+                    return "read:pages";
+
+                case Permission.PagesWrite:
+                    return "write:pages";
+
+                case Permission.PageLikesRead:
+                    return "read:page-likes";
+
+                case Permission.PageLikesWrite:
+                    return "write:page-likes";
+
+                case Permission.UserGroupsRead:
+                    return "read:user-groups";
+
+                case Permission.UserGroupsWrite:
+                    return "write:user-groups";
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(permission), permission, null);

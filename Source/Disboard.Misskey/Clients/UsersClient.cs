@@ -16,30 +16,28 @@ namespace Disboard.Misskey.Clients
             Lists = new ListsClient(client);
         }
 
-        public async Task<UserWithCursor> FollowersAsync(string userId = null, string username = null, bool? iknow = null, int? limit = null, string cursor = null, string host = null)
+        public async Task<IEnumerable<FollowerRelation>> FollowersAsync(string userId = null, string username = null, int? limit = null, string sinceId = null, string untilId = null)
         {
             var parameters = new List<KeyValuePair<string, object>>();
             parameters.AddIfValidValue("userId", userId);
             parameters.AddIfValidValue("username", username);
-            parameters.AddIfValidValue("iknow", iknow);
+            parameters.AddIfValidValue("sinceId", sinceId);
+            parameters.AddIfValidValue("untilId", untilId);
             parameters.AddIfValidValue("limit", limit);
-            parameters.AddIfValidValue("cursor", cursor);
-            parameters.AddIfValidValue("host", host);
 
-            return await PostAsync<UserWithCursor>("/followers", parameters).Stay();
+            return await PostAsync<IEnumerable<FollowerRelation>>("/followers", parameters).Stay();
         }
 
-        public async Task<UserWithCursor> FollowingAsync(string userId, string username = null, bool? iknow = null, int? limit = null, string cursor = null, string host = null)
+        public async Task<IEnumerable<FollowingRelation>> FollowingAsync(string userId = null, string username = null, int? limit = null, string sinceId = null, string untilId = null)
         {
             var parameters = new List<KeyValuePair<string, object>>();
             parameters.AddIfValidValue("userId", userId);
             parameters.AddIfValidValue("username", username);
-            parameters.AddIfValidValue("iknow", iknow);
+            parameters.AddIfValidValue("sinceId", sinceId);
+            parameters.AddIfValidValue("untilId", untilId);
             parameters.AddIfValidValue("limit", limit);
-            parameters.AddIfValidValue("cursor", cursor);
-            parameters.AddIfValidValue("host", host);
 
-            return await PostAsync<UserWithCursor>("/following", parameters).Stay();
+            return await PostAsync<IEnumerable<FollowingRelation>>("/following", parameters).Stay();
         }
 
         public async Task<List<FrequentlyRepliedUser>> GetFrequentlyRepliedUsersAsync(string userId, int? limit = null)

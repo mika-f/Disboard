@@ -6,28 +6,34 @@ namespace Disboard.Misskey.Models
 {
     public class Features : ApiResponse
     {
-        [JsonProperty("registration")]
-        public bool Registration { get; set; }
+        [JsonProperty("discord")]
+        public bool Discord { get; set; }
 
-        [JsonProperty("localTimeline")]
+        [JsonProperty("elasticsearch")]
+        public bool Elasticsearch { get; set; }
+
+        [JsonProperty("localTimeLine")]
         public bool LocalTimeline { get; set; }
 
-        [JsonProperty("elasticSearch")]
-        public bool ElasticSearch { get; set; }
+        [JsonProperty("github")]
+        public bool Github { get; set; }
 
-        [JsonProperty("recaptcha")]
-        public bool Recaptcha { get; set; }
+        [JsonProperty("globalTimeLine")]
+        public bool GlobalTimeline { get; set; }
 
         [JsonProperty("objectStorage")]
         public bool ObjectStorage { get; set; }
 
-        [JsonProperty("twitter")]
-        public bool Twitter { get; set; }
+        [JsonProperty("recaptcha")]
+        public bool Recaptcha { get; set; }
+
+        [JsonProperty("registration")]
+        public bool Registration { get; set; }
 
         [JsonProperty("serviceWorker")]
         public bool ServiceWorker { get; set; }
 
-        [JsonProperty("userRecommendation")]
-        public UserRecommendation UserRecommendation { get; set; }
+        [JsonProperty("twitter")]
+        public bool Twitter { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Disboard.Misskey.Models
     public class MediaProperty : ApiResponse
     {
         [JsonProperty("avgColor")]
-        [JsonConverter(typeof(RgbArrayToColorConverter))]
+        [JsonConverter(typeof(RgbToColorConverter))]
         public Color AvgColor { get; set; }
 
         [JsonProperty("height")]

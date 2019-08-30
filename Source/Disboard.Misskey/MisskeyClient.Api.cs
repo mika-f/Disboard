@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Disboard.Extensions;
@@ -9,13 +8,32 @@ namespace Disboard.Misskey
 {
     public partial class MisskeyClient
     {
-        [Obsolete]
-        public async Task<Chart> ChartAsync(int? limit = null)
+        public async Task<Endpoint> EndpointAsync(string endpoint)
+        {
+            var parameters = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("endpoint", endpoint)
+            };
+
+            return await PostAsync<Endpoint>("/api/endpoint", parameters).Stay();
+        }
+
+        public async Task<IEnumerable<string>> EndpointsAsync()
+        {
+            return await PostAsync<IEnumerable<string>>("/api/endpoints").Stay();
+        }
+
+        public async Task<Metadata> MetaAsync(bool? detail = null)
         {
             var parameters = new List<KeyValuePair<string, object>>();
-            parameters.AddIfValidValue("limit", limit);
+            parameters.AddIfValidValue("detail", detail);
 
-            return await PostAsync<Chart>("/api/chart", parameters).Stay();
+            return await PostAsync<Metadata>("/api/meta", parameters).Stay();
+        }
+
+        public async Task<IEnumerable<User>> PinnedUsersAsync()
+        {
+            return await PostAsync<IEnumerable<User>>("/api/pinned-users").Stay();
         }
 
         public async Task<Drive> DriveAsync()
@@ -27,14 +45,6 @@ namespace Disboard.Misskey
         public async Task<User> IAsync()
         {
             return await PostAsync<User>("/api/i").Stay();
-        }
-
-        public async Task<Metadata> MetaAsync(bool? detail = null)
-        {
-            var parameters = new List<KeyValuePair<string, object>>();
-            parameters.AddIfValidValue("detail", detail);
-
-            return await PostAsync<Metadata>("/api/meta", parameters).Stay();
         }
 
         public async Task<List<Note>> NotesAsync(bool? local = null, bool? reply = null, bool? renote = null, bool? withFiles = null, bool? poll = null, int? limit = null, string sinceId = null, string untilId = null)
